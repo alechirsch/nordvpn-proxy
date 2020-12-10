@@ -11,14 +11,17 @@
     </br>
 </p>
 
-Alpine with OpenVPN and Privoxy to use your NordVPN account.
+
+This is a fork of https://github.com/Joentje/nordvpn-proxy
+
+Alpine with OpenVPN and SSH to use your NordVPN account.
 
 # Features
 
 - Connects to the recommended server for you! Provided by the API.
 - Reconnects if the load is to high on a NordVPN server (Depends on setup CRON).
 - Healthcheck if the connection is not secure.
-- Privoxy to use it elsewhere, for private browsing!
+- Create an ssh tunnel to use NordVPN
 - Connect your other containers, so they have a secured connection as well. A cool Docker feature :)
 - It will download the ovpn files daily! So you will stay up-to-date with the latest ovpn files.
 - Connect to the country that you select! The API will find the fastest server.

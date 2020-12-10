@@ -15,7 +15,6 @@ ENV OVPN_FILES="https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
     LOCAL_NETWORK=192.168.1.0/24
 
 COPY app /app
-EXPOSE 8118
 
 RUN \
     echo "####### Installing packages #######" && \
@@ -34,12 +33,9 @@ RUN \
       find /app -name *.sh | xargs chmod u+x \
       && \
     echo "####### Removing cache #######" && \
-      rm -rf /var/cache/apk/* \
-      && \
-    echo "####### Setting up ssh #######" && \
-      mkdir /app/sshd && \
-      cp /entrypoint.sh /app/sshd/run
+      rm -rf /var/cache/apk/*
 
+ENTRYPOINT []
 CMD ["runsvdir", "/app"]
 
 HEALTHCHECK --interval=1m --timeout=10s \
