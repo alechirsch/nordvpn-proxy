@@ -1,4 +1,4 @@
-FROM alpine:3.10.1
+FROM hermsi/alpine-sshd:latest
 LABEL MAINTAINER "Jeroen Slot"
 
 ENV OVPN_FILES="https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip" \
@@ -34,7 +34,11 @@ RUN \
       find /app -name *.sh | xargs chmod u+x \
       && \
     echo "####### Removing cache #######" && \
-      rm -rf /var/cache/apk/*
+      rm -rf /var/cache/apk/* \
+      && \
+    echo "####### Setting up ssh #######" && \
+      mkdir /app/sshd && \
+      cp /entrypoint.sh /app/sshd/run
 
 CMD ["runsvdir", "/app"]
 
