@@ -34,7 +34,6 @@ You will need a [NordVPN](https://nordvpn.com) account.
 
 - `USERNAME` Username of your account
 - `PASSWORD` Password of your account
-- `LOCAL_NETWORK` - The CIDR mask of the local IP network (e.g. 192.168.1.0/24, 10.1.1.0/24). This is needed to response to your client.
 - `CRON` You can set this variable to change the default check of every 15 minutes. This will be used to check if the LOAD is still OK. This can be changed using the CRON syntax.
 - `LOAD` If the load is > 75 on a NordVPN server, OpenVPN will be restarted and connects to the recommended server for you! This check will be done every 15 minutes by CRON.
 - `COUNTRY` *Optional*, you can choose your own country by using the two-letter country codes that are supported by NordVPN.
@@ -53,7 +52,6 @@ docker run -d \
 --restart=always \
 -e "USERNAME=<nordvpn_username>" \
 -e "PASSWORD=<nordvpn_password>" \
--e "LOCAL_NETWORK=192.168.1.0/24" \
 -v /etc/localtime:/etc/localtime:ro \
 -v ovpn-data:/app/ovpn/config \
 -p 8118:8118 \

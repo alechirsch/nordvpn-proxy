@@ -1,5 +1,5 @@
-FROM hermsi/alpine-sshd:latest
-LABEL MAINTAINER "Jeroen Slot"
+FROM vimagick/tinyproxy
+LABEL MAINTAINER "Alec Hirsch"
 
 ENV OVPN_FILES="https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip" \
     OVPN_CONFIG_DIR="/app/ovpn/config" \
@@ -11,15 +11,17 @@ ENV OVPN_FILES="https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
     USERNAME="" \
     PASSWORD="" \
     COUNTRY="" \
-    LOAD=75 \
-    LOCAL_NETWORK=192.168.1.0/24
+    LOAD=75
 
 COPY app /app
 
 RUN \
+    echo "####### Changing permissions #######" && \
+      chmod u+x /app/**/run && \
+      chmod u+x /app/**/*.sh \
+      && \
     echo "####### Installing packages #######" && \
     apk --update --no-cache add \
-      privoxy \
       openvpn \
       runit \
       bash \
@@ -27,10 +29,6 @@ RUN \
       ncurses \
       curl \
       unzip \
-      && \
-    echo "####### Changing permissions #######" && \
-      find /app -name run | xargs chmod u+x && \
-      find /app -name *.sh | xargs chmod u+x \
       && \
     echo "####### Removing cache #######" && \
       rm -rf /var/cache/apk/*
